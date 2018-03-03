@@ -10,7 +10,11 @@ import com.example.ocimara.demoaacretrofit.repositories.EnderecoRepositoryImpl
 
 class MainViewModel : ViewModel() {
     private val enderecoRepository: EnderecoRepository
-    private val apiResponse: MediatorLiveData<EnderecoResponse> = MediatorLiveData()
+    private val mApiResponse: MediatorLiveData<EnderecoResponse> = MediatorLiveData()
+
+
+    val apiResponse: LiveData<EnderecoResponse>
+        get() = mApiResponse
 
     init {
 
@@ -19,8 +23,13 @@ class MainViewModel : ViewModel() {
     }
 
     fun pesquisarEndereco(cep: String): LiveData<EnderecoResponse> {
+        mApiResponse.addSource(
+                enderecoRepository.buscarEndereco(cep)) {
 
-
+            apiResponse ->
+            mApiResponse.value = apiResponse
+        }
+        return mApiResponse
     }
 
 }
