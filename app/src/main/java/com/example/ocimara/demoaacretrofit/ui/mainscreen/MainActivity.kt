@@ -1,11 +1,14 @@
 package com.example.ocimara.demoaacretrofit.ui.mainscreen
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.ocimara.demoaacretrofit.R
+import com.example.ocimara.demoaacretrofit.api.EnderecoAPI
+import com.example.ocimara.demoaacretrofit.entities.EnderecoResponse
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,8 +27,20 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.apiResponse.observe(this, Observer { apiResponse ->
             if (apiResponse?.erro == null) {
                 Log.i("TAG", "SUCESSO")
+
+                val end = apiResponse?.endereco
+
+                tvResultado.text =
+                                    "CEP: ${end?.cep}\n" +
+                                    "Logradouro: ${end?.logradouro}\n" +
+                                    "Complemento: ${end?.complemeto}\n" +
+                                    "Bairro: ${end?.bairro}\n" +
+                                    "Localidade: ${end?.localidade}\n" +
+                                    "UF: ${end?.uf}"
+
+
             } else {
-                Log.i("TAG", "ERRO")
+                Log.i("TAG", "ERRO: ${apiResponse.erro}")
             }
         })
     }
