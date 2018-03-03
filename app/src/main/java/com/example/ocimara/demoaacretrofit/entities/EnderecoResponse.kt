@@ -10,6 +10,9 @@ class EnderecoResponse {
         this.erro = null
     }
 
+
+
+
     constructor(erro: Throwable) {
         this.erro = erro
         this.endereco = null
