@@ -18,12 +18,13 @@
         android:layout_height="wrap_content"
         android:text="Pesquisar"
         android:id="@+id/btPesquisar"
+
         />
 
     <TextView
+        android:id="@+id/tvResultado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/tvResultado" />
+        android:gravity="center" />
 
 </LinearLayout>
