@@ -28,6 +28,7 @@ class MainViewModel : ViewModel() {
 
             apiResponse ->
             mApiResponse.value = apiResponse
+
         }
         return mApiResponse
     }
