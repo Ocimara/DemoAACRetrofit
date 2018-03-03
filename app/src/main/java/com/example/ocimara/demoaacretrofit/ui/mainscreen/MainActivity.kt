@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.ocimara.demoaacretrofit.R
 import com.example.ocimara.demoaacretrofit.api.EnderecoAPI
 import com.example.ocimara.demoaacretrofit.entities.EnderecoResponse
@@ -41,8 +42,24 @@ class MainActivity : AppCompatActivity() {
 
             } else {
                 Log.i("TAG", "ERRO: ${apiResponse.erro}")
+                tvResultado.text = "Sistema Indisponível \n Tente mais tarde!"
+
             }
         })
+
+        mainViewModel.isLoading.observe(this,Observer{
+            isLoading ->
+
+            if (isLoading!!){
+                loading.visibility = View.VISIBLE
+
+            }
+            else
+            {
+                loading.visibility = View.GONE
+            }
+
+                 })
     }
 
 }
